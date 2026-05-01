@@ -4,122 +4,38 @@
 
 footer .footer-text {
     color: #f3f3f3;
+    font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+    line-height: var(--lh-body);
     max-width: 30rem;
+    margin: 0 auto;
 }
 
 .animated-box {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-family: var(--font-mono);
+    font-size: clamp(0.8rem, 0.4vw + 0.7rem, 0.9375rem);
     color: #ffffff;
-    padding: 30px;
+    padding: clamp(0.625rem, 2vw, 1.875rem);
     text-align: center;
     border-radius: 4px;
-    position: relative; /* To allow for the animation, but not used for positioning */
+    position: relative;
     overflow: hidden;
-    border: 2px solid transparent; /* Initial border state */
+    border: 2px solid transparent;
 }
 
-/* Animated box with a gradient border effect */
 .animated-box.in {
     animation: gradient-animation 4s ease-in-out infinite, frame-enter 1s forwards ease-in-out;
 }
 
-/* Gradient animation for border */
 @keyframes gradient-animation {
-    0% {
-        border-color: #00F260;
-    }
-    50% {
-        border-color: #0575E6;
-    }
-    100% {
-        border-color: #00F260;
-    }
+    0%   { border-color: #00F260; }
+    50%  { border-color: #0575E6; }
+    100% { border-color: #00F260; }
 }
 
-/* Frame animation (making the "frame" appear) */
 @keyframes frame-enter {
-    0% {
-        border-width: 2px;
-    }
-    25% {
-        border-width: 5px;
-    }
-    50% {
-        border-width: 8px;
-    }
-    75% {
-        border-width: 5px;
-    }
-    100% {
-        border-width: 2px;
-    }
-}
-
-
-/* Footer Text */
-footer .footer-text {
-    font-size: 1rem;
-    margin: 0 auto;
-}
-
-@media screen and (max-width: 1080px) {
-    footer .footer-text {
-        font-size: 0.9rem;
-        max-width: 90%;
-        margin: 0 auto;
-    }
-
-    .animated-box {
-        padding: 20px;
-        font-size: 0.9rem;
-    }
-}
-
-@media screen and (max-width: 930px) {
-
-    footer .footer-text {
-        font-size: 0.85rem;
-        max-width: 90%;
-    }
-
-    .animated-box {
-        padding: 15px;  /* Reduce padding */
-        font-size: 0.85rem;  /* Smaller font size */
-    }
-}
-
-@media screen and (max-width: 865px) {
-    footer .footer-text {
-        font-size: 0.8rem; /* Small text size for tiny screens */
-        max-width: 100%; /* Allow footer text to use full width */
-    }
-
-    .animated-box {
-        padding: 10px;
-        font-size: 0.8rem; /* Small font size for small screens */
-    }
-}
-
-@media screen and (max-width: 629px) {
-    footer .footer-text {
-        font-size: 0.75rem; /* Very small text size */
-        max-width: 100%; /* Ensure text is fully responsive */
-    }
-
-    .animated-box {
-        padding: 10px;
-        font-size: 0.75rem;
-    }
-}
-
-@media screen and (max-width: 592px) {
-    footer .footer-text {
-        font-size: 0.7rem;
-        max-width: 100%;
-    }
-
-    .animated-box {
-        padding: 8px;
-        font-size: 0.7rem;
-    }
+    0%   { border-width: 2px; }
+    25%  { border-width: 5px; }
+    50%  { border-width: 8px; }
+    75%  { border-width: 5px; }
+    100% { border-width: 2px; }
 }

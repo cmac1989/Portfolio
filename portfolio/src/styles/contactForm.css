@@ -4,6 +4,11 @@
 }
 div.contactForm h1 {
     color: white;
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    line-height: var(--lh-heading);
+    letter-spacing: -0.01em;
     margin-bottom: 2rem;
 }
 

@@ -2,23 +2,36 @@
     background-color: #222529;
     margin: 70px 85px;
 }
-.hero p.grey-text {
-    color: #9a9999;
-    font-size: 1.3em;
-    margin-bottom: 30px;
-}
+
 .hero h1 {
     color: white;
-    font-size: 3em;
+    font-family: var(--font-display);
+    font-size: var(--fs-display);
+    font-weight: 700;
+    line-height: var(--lh-display);
+    letter-spacing: -0.02em;
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
 }
 
 .hero h2 {
     color: white;
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 400;
+    line-height: var(--lh-heading);
+    letter-spacing: -0.01em;
 }
+
+.hero p.grey-text {
+    color: #9a9999;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    margin-bottom: 30px;
+}
+
 div.hero p {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
     margin-bottom: 10px;
     color: #f3f3f3;
     max-width: 530px;

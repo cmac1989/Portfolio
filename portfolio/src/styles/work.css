@@ -4,6 +4,11 @@
 }
 .work h2 {
     color: white;
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    line-height: var(--lh-heading);
+    letter-spacing: -0.01em;
     padding-left: 30px;
 }
 div.work div.card {
@@ -33,14 +38,18 @@ div.card-body-left {
 }
 div p.date-text {
     color: grey;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-heading);
     margin: 0;
 }
 h3.body-text,
 p.body-text {
-    font-family: Montserrat, sans-serif;
+    font-family: var(--font-sans);
     color: #f3f3f3;
     width: 100%;
+    line-height: var(--lh-body);
 }
 h3.body-text {
-    font-size: 1.5em;
+    font-size: var(--fs-h3);
+    font-weight: 600;
 }

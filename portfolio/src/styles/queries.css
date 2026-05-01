@@ -21,9 +21,6 @@
     }
     .navbar-brand {
         color: #f3f3f3;
-        font-weight: bold;
-        font-size: 1.2em;
-        letter-spacing: 1px;
     }
     div.projects,
     div.skills {
@@ -86,18 +83,6 @@
     }
 }
 @media screen and (max-width: 592px) {
-    div.hero p.grey-text {
-        font-size: 1.1em;
-    }
-    div.hero h1 {
-        font-size: 2.5em;
-    }
-    div.hero h2 {
-        font-size: 1.6em;
-    }
-    .navbar-brand {
-        font-size: 1.1em;
-    }
     div.icon-nav-bar .fa-linkedin,
     div.icon-nav-bar .fa-facebook,
     div.icon-nav-bar .fa-instagram,
@@ -108,31 +93,6 @@
         cursor: pointer;
         transition: .2s;
     }
-    div.cardBody.card-body div.card-title h3.grey-text {
-        font-size: 1.1em;
-    }
-    div.card-body p.date-text {
-        font-size: 1em;
-    }
-    div.card-body.card-body h3.body-text {
-        font-size: 1.3em;
-    }
-    div.card-body.card-body p.body-text {
-        font-size: 1em;
-    }
-    div.cardBody.card-body p {
-        font-size: 1em;
-    }
-    div.cardBody.card-body h3 {
-        font-size: 1.4em;
-    }
-    div.card-body-right p.body-text {
-        font-size: 1.1em;
-    }
-    div.mb-3 label {
-        font-size: 1em;
-    }
-
     .mx-5 {
         justify-content: start;
         margin: 0;
