@@ -1,0 +1,126 @@
+/* ── Section wrapper — matches projects/skills margin pattern ─── */
+.education-section {
+    background-color: #222529;
+    margin: 70px 85px 50px 50px;
+}
+
+.education-heading {
+    color: #f3f3f3;
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    line-height: var(--lh-heading);
+    letter-spacing: -0.01em;
+    margin: 0 0 2rem;
+}
+
+@media screen and (max-width: 1080px) {
+    .education-section {
+        margin: 60px 40px 40px 40px;
+    }
+}
+
+@media screen and (max-width: 592px) {
+    .education-section {
+        margin: 60px 20px 20px 20px;
+    }
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+.edu-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 2px solid #4ade80;
+    border-radius: 10px;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.edu-card:hover {
+    background: rgba(255, 255, 255, 0.055);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Top row: badge + date ───────────────────────────────────── */
+.edu-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.edu-badge {
+    display: inline-block;
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.edu-date {
+    color: #9a9999;
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    white-space: nowrap;
+}
+
+/* ── Programme + institution ─────────────────────────────────── */
+.edu-program {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    color: #f3f3f3;
+    letter-spacing: -0.01em;
+    line-height: var(--lh-heading);
+    margin: 0 0 0.35rem;
+}
+
+.edu-institution {
+    color: #9a9999;
+    font-family: var(--font-sans);
+    font-size: var(--fs-sm);
+    margin: 0 0 1.25rem;
+}
+
+/* ── Description ─────────────────────────────────────────────── */
+.edu-description {
+    color: #c8cdd4;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    margin: 0 0 1.5rem;
+    max-width: 65ch;
+}
+
+/* ── Skill pills ─────────────────────────────────────────────── */
+.edu-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.edu-tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    color: #c8cdd4;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.edu-tag:hover {
+    background: rgba(74, 222, 128, 0.08);
+    border-color: rgba(74, 222, 128, 0.3);
+    color: #f3f3f3;
+}

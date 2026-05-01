@@ -1,90 +1,72 @@
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import'../styles/header.css'
-import {useEffect, useState} from "react";
+import '../styles/header.css';
+import { useEffect, useState } from "react";
 import IconNavBar from "./IconNavBar";
 
+const NAV_ITEMS = [
+    { id: 'projects',  label: 'Projects'  },
+    { id: 'skills',    label: 'Skills'    },
+    { id: 'work',      label: 'Work'      },
+    { id: 'education', label: 'Education' },
+    { id: 'contact',   label: 'Contact'   },
+];
+
 function Header() {
-    // State to keep track of the active section
     const [activeSection, setActiveSection] = useState('');
 
     useEffect(() => {
-        const sections = document.querySelectorAll('section'); // All sections
-        const observerOptions = {
-            root: null, // Observe within the viewport
-            rootMargin: '0px 0px -100% 0px', // No margin to the viewport
-            threshold: 0, // Trigger when 50% of the section is visible
-        };
+        const scrollEl = document.querySelector('.scroll-container');
+        if (!scrollEl) return;
 
-        const handleIntersection = (entries) => {
-            entries.forEach((entry) => {
-                console.log(entry.target.id, entry.isIntersecting, entry.intersectionRatio);
-                if (entry.isIntersecting) {
-                    // When the section is 50% in view, set it as the active section
-                    setActiveSection(entry.target.id);
+        const updateActive = () => {
+            const { scrollTop, scrollHeight, clientHeight } = scrollEl;
+            const containerRect = scrollEl.getBoundingClientRect();
+
+            // When the user has scrolled to the very bottom, the last
+            // section's top may never reach the trigger threshold, so
+            // force it active here.
+            if (scrollHeight - scrollTop - clientHeight < 10) {
+                setActiveSection('contact');
+                return;
+            }
+
+            // Activate the last section whose top has entered the top
+            // third of the visible scroll container.
+            const sections = scrollEl.querySelectorAll('section[id]');
+            let active = '';
+            sections.forEach((section) => {
+                const sectionTop = section.getBoundingClientRect().top - containerRect.top;
+                if (sectionTop <= clientHeight / 3) {
+                    active = section.id;
                 }
             });
+            if (active) setActiveSection(active);
         };
 
-        const observer = new IntersectionObserver(handleIntersection, observerOptions);
+        scrollEl.addEventListener('scroll', updateActive, { passive: true });
+        updateActive(); // set initial state on mount
 
-        // Observe each section
-        sections.forEach((section) => {
-            observer.observe(section);
-        });
-
-        // Cleanup observer on unmount
-        return () => {
-            observer.disconnect();
-        };
+        return () => scrollEl.removeEventListener('scroll', updateActive);
     }, []);
+
     return (
-        <div>
-            <Navbar className={activeSection === 'projects' ? 'bg-primary' : 'bg-secondary'}>
-                <Container>
-                    <Navbar.Brand
-                        href="#projects"
-                        className={activeSection === 'projects' ? 'active' : ''}
-                    >
-                        Projects
-                    </Navbar.Brand>
-                </Container>
-            </Navbar>
-            <br />
-            <Navbar className={activeSection === 'skills' ? 'bg-primary' : 'bg-secondary'}>
-                <Container>
-                    <Navbar.Brand
-                        href="#skills"
-                        className={activeSection === 'skills' ? 'active' : ''}
-                    >
-                        Skills
-                    </Navbar.Brand>
-                </Container>
-            </Navbar>
-            <br />
-            <Navbar className={activeSection === 'work' ? 'bg-primary' : 'bg-secondary'}>
-                <Container>
-                    <Navbar.Brand
-                        href="#work"
-                        className={activeSection === 'work' ? 'active' : ''}
-                    >
-                        Work
-                    </Navbar.Brand>
-                </Container>
-            </Navbar>
-            <br />
-            <Navbar className={activeSection === 'contact' ? 'bg-primary' : 'bg-secondary'}>
-                <Container>
-                    <Navbar.Brand
-                        href="#contact"
-                        className={activeSection === 'contact' ? 'active' : ''}
-                    >
-                        Contact
-                    </Navbar.Brand>
-                </Container>
-            </Navbar>
-            <IconNavBar/>
+        <div className="header">
+            <nav className="site-nav" aria-label="Page sections">
+                <ul>
+                    {NAV_ITEMS.map(({ id, label }) => (
+                        <li key={id}>
+                            <a
+                                href={`#${id}`}
+                                className={activeSection === id ? 'active' : ''}
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+            <IconNavBar />
         </div>
     );
 }
+
 export default Header;

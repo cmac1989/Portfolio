@@ -1,36 +1,41 @@
 import React, { useState, useEffect } from 'react';
 
-
-const Typewriter = ({ text, speed = 80, loop = true }) => {
+const Typewriter = ({ words = [''], typeSpeed = 75, deleteSpeed = 40, pauseTime = 1800 }) => {
     const [displayedText, setDisplayedText] = useState('');
-    const [index, setIndex] = useState(0);
-    const [isTyping, setIsTyping] = useState(true); // To track typing state
+    const [wordIndex, setWordIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
-        if (index < text.length) {
-            // Typing effect
-            const timeout = setTimeout(() => {
-                setDisplayedText((prev) => prev + text.charAt(index));
-                setIndex(index + 1);
-            }, speed);
-            return () => clearTimeout(timeout);
-        } else if (loop) {
-            // Reset typing effect when finished
-            setIsTyping(false); // Finish typing
-            const loopTimeout = setTimeout(() => {
-                setDisplayedText(''); // Clear text
-                setIndex(0); // Reset the index to start typing again
-                setIsTyping(true); // Start typing again
-            }, 1000); // Wait for 1 second before looping
-            return () => clearTimeout(loopTimeout);
+        const currentWord = words[wordIndex % words.length];
+
+        if (!isDeleting) {
+            if (displayedText.length < currentWord.length) {
+                const timeout = setTimeout(() => {
+                    setDisplayedText(currentWord.slice(0, displayedText.length + 1));
+                }, typeSpeed);
+                return () => clearTimeout(timeout);
+            } else {
+                const timeout = setTimeout(() => setIsDeleting(true), pauseTime);
+                return () => clearTimeout(timeout);
+            }
+        } else {
+            if (displayedText.length > 0) {
+                const timeout = setTimeout(() => {
+                    setDisplayedText(currentWord.slice(0, displayedText.length - 1));
+                }, deleteSpeed);
+                return () => clearTimeout(timeout);
+            } else {
+                setIsDeleting(false);
+                setWordIndex((prev) => (prev + 1) % words.length);
+            }
         }
-    }, [index, text, speed, loop]);
+    }, [displayedText, isDeleting, wordIndex, words, typeSpeed, deleteSpeed, pauseTime]);
 
     return (
         <span>
-      {displayedText}
-            {isTyping && <span className="typewriter-cursor">|</span>}
-    </span>
+            {displayedText}
+            <span className="typewriter-cursor">|</span>
+        </span>
     );
 };
 

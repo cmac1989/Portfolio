@@ -1,142 +1,127 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import emailjs from '@emailjs/browser';
 import '../styles/contactForm.css';
 import FormModal from './FormModal';
-import { useState } from 'react';
+
+const SERVICE_ID  = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY  = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+
+const EMPTY_FORM = { name: '', email: '', message: '' };
 
 export default function ContactForm() {
-    // State for form fields
-    const [formData, setFormData] = useState({
-        email: '',
-        name: '',
-        message: '',
-        checkEmail: false, // Make sure this is part of the state
-    });
-
-    // State for validation messages
-    const [validated, setValidated] = useState(false);
-    // State for validation errors
-    const [errors, setErrors] = useState({
-        email: '',
-        name: '',
-        message: '',
-        checkEmail: '',
-    });
-    // State for modal visibility
+    const [formData, setFormData]   = useState(EMPTY_FORM);
+    const [errors, setErrors]       = useState({});
+    const [sending, setSending]     = useState(false);
+    const [sendError, setSendError] = useState('');
     const [modalShow, setModalShow] = useState(false);
 
-    // Handle form field changes
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-
-        setFormData({
-            ...formData,
-            [name]: type === 'checkbox' ? checked : value,
-        });
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
     };
 
-    // Validate form fields
-    const validateForm = () => {
+    const validate = () => {
         const newErrors = {};
-        // Email validation
-        if (!formData.email) {
-            newErrors.email = 'Email is required';
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            newErrors.email = 'Email address is invalid';
+        if (!formData.name || formData.name.length < 2) {
+            newErrors.name = 'Name must be at least 2 characters.';
         }
-        // Name validation
-        if (!formData.name) {
-            newErrors.name = 'Name is required';
-        } else if (formData.name.length < 3) {
-            newErrors.name = 'Name must be at least 3 characters long';
+        if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = 'A valid email address is required.';
         }
-        // Message validation
-        if (!formData.message) {
-            newErrors.message = 'Message is required';
-        } else if (formData.message.length < 10) {
-            newErrors.message = 'Message is not long enough';
+        if (!formData.message || formData.message.length < 10) {
+            newErrors.message = 'Message must be at least 10 characters.';
         }
-        // Checkbox validation
-        if (!formData.checkEmail) {
-            newErrors.checkEmail = 'You must check this box to receive a reply';
-        }
-
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0; // Return true if no errors
+        return Object.keys(newErrors).length === 0;
     };
 
-    // Handle form submission
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (validateForm()) {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSendError('');
+        if (!validate()) return;
+
+        setSending(true);
+        try {
+            await emailjs.send(
+                SERVICE_ID,
+                TEMPLATE_ID,
+                {
+                    from_name:  formData.name,
+                    from_email: formData.email,
+                    message:    formData.message,
+                },
+                PUBLIC_KEY,
+            );
+            setFormData(EMPTY_FORM);
             setModalShow(true);
-            setFormData({ email: '', name: '', message: '', checkEmail: false });
-        } else {
-            console.log('form errors');
+        } catch {
+            setSendError('Something went wrong. Please try again or email me directly.');
+        } finally {
+            setSending(false);
         }
     };
 
     return (
         <div className="contactForm" id="contact">
             <h1>Contact Me</h1>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label column="lg">Email address</Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="Enter email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-                    {errors.email && <span className="error-text">{errors.email}</span>}
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label column="lg">Name</Form.Label>
+            <Form onSubmit={handleSubmit} noValidate>
+                <Form.Group className="mb-3" controlId="contactName">
+                    <Form.Label>Name</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Name"
+                        placeholder="Your name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
+                        isInvalid={!!errors.name}
                     />
                     {errors.name && <span className="error-text">{errors.name}</span>}
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label column="lg">Leave a message</Form.Label>
+                <Form.Group className="mb-3" controlId="contactEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                        type="email"
+                        placeholder="you@example.com"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        isInvalid={!!errors.email}
+                    />
+                    {errors.email && <span className="error-text">{errors.email}</span>}
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="contactMessage">
+                    <Form.Label>Message</Form.Label>
                     <Form.Control
                         as="textarea"
-                        rows={3}
-                        placeholder="Leave a comment here"
+                        rows={4}
+                        placeholder="What's on your mind?"
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
+                        isInvalid={!!errors.message}
                     />
                     {errors.message && <span className="error-text">{errors.message}</span>}
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check
-                        type="checkbox"
-                        label="Check if you'd like to recieve a reply."
-                        name="checkEmail"
-                        checked={formData.checkEmail} // Bind checkbox to state
-                        onChange={handleChange} // Update state on change
-                    />
-                    {errors.checkEmail && <span className="error-text">{errors.checkEmail}</span>}
-                </Form.Group>
+                {sendError && <p className="error-text send-error">{sendError}</p>}
 
-                <Button className="custom-button" variant="primary" type="submit">
-                    Submit
+                <Button
+                    className="custom-button"
+                    variant="primary"
+                    type="submit"
+                    disabled={sending}
+                >
+                    {sending ? 'Sending…' : 'Send Message'}
                 </Button>
-
-                <FormModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                />
             </Form>
+
+            <FormModal show={modalShow} onHide={() => setModalShow(false)} />
         </div>
     );
 }
