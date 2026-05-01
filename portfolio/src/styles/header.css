@@ -2,7 +2,13 @@ nav.bg-secondary,
 nav.bg-primary {
     border-radius: 5px;
 }
+.navbar-brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+}
 .navbar-brand.active {
-    color: #f3f3f3; /* Active link color (e.g., white) */
-    font-weight: bold; /* Make the active link bold */
+    color: #f3f3f3;
+    font-weight: 700;
 }

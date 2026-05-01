@@ -4,6 +4,11 @@
 }
 div.projects h2 {
     color: white;
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    line-height: var(--lh-heading);
+    letter-spacing: -0.01em;
     margin-bottom: 30px;
 }
 div.projects h2.accordion-header {
@@ -26,9 +31,13 @@ div.accordion-item > h2.accordion-header {
 button.accordion-button {
     background-color: #3d434a;
     color: #f3f3f3;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    letter-spacing: -0.01em;
 }
 .accordion-button:not(.collapsed) {
-    background-color: rgb(174, 181, 188); /* Text color */
+    background-color: rgb(174, 181, 188);
     box-shadow: none;
 }
 
@@ -40,11 +49,15 @@ div.card-body {
     padding: 30px;
 }
 div.card-body h3 {
-    font-weight: bold;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    line-height: var(--lh-heading);
+    letter-spacing: -0.01em;
 }
 div.card-body p {
-    font-family: Montserrat, sans-serif;
-    font-size: 1.2em;
-    letter-spacing: 1px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
     margin-top: 20px;
 }
