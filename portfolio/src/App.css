@@ -43,6 +43,7 @@ html, body {
 body {
   margin: 0;
   padding: 0;
+  background-color: #1e2124;
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
