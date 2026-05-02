@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Skills from './components/Skills';
 import Work from './components/Work';
 import Education from './components/Education';
+import Reveal from './components/Reveal';
 
 function App() {
     return (
@@ -19,21 +20,21 @@ function App() {
             </div>
             <div className="scroll-container">
                 <section id="projects">
-                    <Projects />
+                    <Reveal><Projects /></Reveal>
                 </section>
                 <section id="skills">
-                    <Skills />
+                    <Reveal><Skills /></Reveal>
                 </section>
                 <section id="work">
-                    <Work />
+                    <Reveal><Work /></Reveal>
                 </section>
                 <section id="education">
-                    <Education />
+                    <Reveal><Education /></Reveal>
                 </section>
                 <section id="contact">
-                    <ContactForm />
+                    <Reveal><ContactForm /></Reveal>
                 </section>
-                <Footer />
+                <Reveal><Footer /></Reveal>
             </div>
         </div>
     );

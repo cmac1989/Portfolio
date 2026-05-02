@@ -1,9 +1,9 @@
 .projects {
-    background-color: #222529;
+    background-color: transparent;
     margin: 70px 85px 70px 50px;
 }
 
-div.projects h2:not(.accordion-header) {
+div.projects h2 {
     color: #f3f3f3;
     font-family: var(--font-display);
     font-size: var(--fs-h2);
@@ -15,7 +15,7 @@ div.projects h2:not(.accordion-header) {
     position: relative;
 }
 
-div.projects h2:not(.accordion-header)::after {
+div.projects h2::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -26,90 +26,129 @@ div.projects h2:not(.accordion-header)::after {
     border-radius: 2px;
 }
 
-div.projects h2.accordion-header {
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-/* Bootstrap accordion variable overrides */
-.projects .accordion {
-    --bs-accordion-bg: var(--surface);
-    --bs-accordion-border-color: var(--border);
-    --bs-accordion-btn-color: #f3f3f3;
-    --bs-accordion-btn-bg: var(--surface);
-    --bs-accordion-active-bg: var(--surface-hover);
-    --bs-accordion-active-color: var(--accent);
-    --bs-accordion-border-radius: 10px;
-    --bs-accordion-inner-border-radius: 9px;
-    --bs-accordion-body-padding-x: 1.5rem;
-    --bs-accordion-body-padding-y: 1.5rem;
+/* ── Card list ────────────────────────────────────────────── */
+.project-cards {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1.5rem;
 }
 
-.projects .accordion-item {
-    border-radius: 10px !important;
+.project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    border-radius: 10px;
     overflow: hidden;
-    border: 1px solid var(--border) !important;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
-.projects .accordion-button {
-    font-family: var(--font-display);
-    font-size: var(--fs-h3);
-    font-weight: 500;
-    letter-spacing: -0.01em;
+.project-card:hover {
+    background: var(--surface-hover);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    transform: translateY(-2px);
 }
 
-.projects .accordion-button::after {
-    filter: invert(1) brightness(0.7);
+/* ── Screenshot ───────────────────────────────────────────── */
+.project-card-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
 }
 
-.projects .accordion-button:not(.collapsed)::after {
-    /* green-tinted chevron when expanded */
-    filter: invert(73%) sepia(51%) saturate(468%) hue-rotate(87deg) brightness(103%) contrast(88%);
+.project-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
 }
 
-.projects .accordion-button:focus {
-    box-shadow: none;
-    border-color: var(--accent-border);
+.project-card:hover .project-card-img img {
+    transform: scale(1.03);
 }
 
-/* Card inside accordion body */
-.projects .accordion-body .card {
-    background-color: transparent !important;
-    border: none !important;
+/* Portrait variant — screenshot contained on a dark mat */
+.project-card-img--portrait {
+    background: #13161a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.projects .accordion-body .card-body {
-    padding: 0 !important;
-    background-color: transparent !important;
+.project-card-img--portrait img {
+    width: auto;
+    height: 100%;
+    max-width: 45%;
+    object-fit: contain;
 }
 
-div.card-body h3 {
+.project-card:hover .project-card-img--portrait img {
+    transform: scale(1.03);
+}
+
+/* ── Content ──────────────────────────────────────────────── */
+.project-card-body {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.project-title {
     font-family: var(--font-display);
     font-size: var(--fs-h3);
     font-weight: 600;
-    line-height: var(--lh-heading);
-    letter-spacing: -0.01em;
     color: #f3f3f3;
-    margin: 1rem 0 0.5rem;
+    letter-spacing: -0.01em;
+    line-height: var(--lh-heading);
+    margin: 0 0 0.6rem;
 }
 
-div.card-body p {
+.project-description {
     font-family: var(--font-sans);
     font-size: var(--fs-body);
     line-height: var(--lh-body);
     color: #c8cdd4;
-    margin: 0 0 1rem;
+    margin: 0 0 1.25rem;
+    max-width: 65ch;
 }
 
-/* Tech pills */
+/* ── Card footer: pills + repo link ──────────────────────── */
+.project-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.project-repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #9a9999;
+    font-family: var(--font-sans);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+}
+
+.project-repo-link:hover {
+    color: var(--accent);
+}
+
+.project-repo-icon {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+/* ── Tech pills ───────────────────────────────────────────── */
 .tech-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin-top: 0.75rem;
 }
 
 .tech-tag {
@@ -129,6 +168,7 @@ div.card-body p {
     border-color: rgba(74, 222, 128, 0.4);
 }
 
+/* ── Responsive ───────────────────────────────────────────── */
 @media screen and (max-width: 1080px) {
     .projects {
         margin: 60px 40px 40px 40px;

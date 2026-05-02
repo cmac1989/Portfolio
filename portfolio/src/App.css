@@ -68,10 +68,11 @@ div.main-container {
   height: 100%;
   overflow: hidden;
 
-  /* Subtle radial glow behind the name */
+  /* Radial glow + dot grid */
   background:
-    radial-gradient(ellipse at 15% 12%, rgba(74, 222, 128, 0.06) 0%, transparent 55%),
-    #222529;
+    radial-gradient(ellipse at 15% 12%, rgba(74, 222, 128, 0.08) 0%, transparent 55%),
+    radial-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px) 0 0 / 28px 28px,
+    #1e2124;
 
   /* Gradient border on the right edge */
   border-right: 1px solid transparent;
@@ -101,8 +102,13 @@ div.main-container {
   height: 100%;
   overflow-y: auto;
   scroll-behavior: smooth;
-  background-color: #222529;
   padding: 1%;
+
+  /* Radial glow (top-right) + matching dot grid */
+  background:
+    radial-gradient(ellipse at 90% 5%, rgba(74, 222, 128, 0.05) 0%, transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.038) 1px, transparent 1px) 0 0 / 28px 28px,
+    #1e2124;
 }
 
 /* ── Responsive: stack layout on small screens ────────────── */

@@ -1,14 +1,11 @@
-import * as React from 'react';
 import '../styles/footer.css';
 
 export default function Footer() {
     return (
         <footer className="footer">
-            <div className="animated-box in">
-                <p className="footer-text">
-                    Built with React and Bootstrap.
-                </p>
-            </div>
+            <p className="footer-text">
+                Designed &amp; built by <span className="footer-name">Cameron McRae</span>
+            </p>
         </footer>
     );
 }
