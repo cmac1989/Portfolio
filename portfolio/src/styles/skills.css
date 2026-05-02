@@ -1,55 +1,83 @@
 .skills {
-    background-color: #222529;
+    background-color: transparent;
     margin: 70px 85px 20px 50px;
 }
+
 div.skills h2 {
-    color: white;
+    color: #f3f3f3;
     font-family: var(--font-display);
     font-size: var(--fs-h2);
     font-weight: 600;
     line-height: var(--lh-heading);
     letter-spacing: -0.01em;
-    margin-bottom: 30px;
+    margin: 0 0 2rem;
+    padding-bottom: 0.6rem;
+    position: relative;
 }
 
-div.list-group .list-group-item p {
-    margin-bottom: 10px;
-    margin-top: 10px;
+div.skills h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
 }
-div.listItemContainer {
+
+/* ── Groups ───────────────────────────────────────────────── */
+.skill-groups {
     display: flex;
-    align-items: center;
-}
-.icon-container {
-    width: 20px;
-}
-div.listItemContainer p {
-    margin-left: 20px
+    flex-direction: column;
+    gap: 2rem;
 }
 
-div.col-sm-8 {
-    color: white;
-}
-.grey-text {
-    color: #222529;
-    font-variant: small-caps;
+.skill-group-label {
+    display: block;
+    color: #9a9999;
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
 }
 
-.fa-react {
-    color: #61DBFB;
+/* ── Pills ────────────────────────────────────────────────── */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
-.fa-angular {
-    color: #a6120d;
+
+.skill-tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    color: #c8cdd4;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    font-weight: 500;
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-.fa-java {
-    color: #5382a1;
+
+.skill-tag:hover {
+    background: rgba(74, 222, 128, 0.08);
+    border-color: rgba(74, 222, 128, 0.3);
+    color: #f3f3f3;
 }
-.fa-php {
-    color: #8993be;
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media screen and (max-width: 1080px) {
+    .skills {
+        margin: 60px 40px 40px 40px;
+    }
 }
-.fa-html5 {
-    color: #e34c26;
-}
-.fa-css {
-    color: #264de4;
+
+@media screen and (max-width: 592px) {
+    .skills {
+        margin: 60px 20px 20px 20px;
+    }
 }

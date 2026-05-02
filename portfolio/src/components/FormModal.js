@@ -6,20 +6,12 @@ export default function FormModal(props) {
         <Modal
             {...props}
             size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
+            aria-labelledby="form-modal-title"
             centered
         >
-            {/*<Modal.Header closeButton>*/}
-            {/*    <Modal.Title id="contained-modal-title-vcenter">*/}
-            {/*        Success!*/}
-            {/*    </Modal.Title>*/}
-            {/*</Modal.Header>*/}
-            <Modal.Body closeButton>
-                <h4>Message Sent</h4>
-                <p>
-                    Due to a high influx of requests you can expect to receive a response within
-                    7-10 business days.
-                </p>
+            <Modal.Body>
+                <h4 id="form-modal-title">Message sent!</h4>
+                <p>Thanks for reaching out — I'll get back to you as soon as I can.</p>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>

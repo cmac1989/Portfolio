@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
@@ -14,6 +18,14 @@
   --lh-display: 1.1;
   --lh-heading: 1.25;
   --lh-body: 1.65;
+
+  /* Colour tokens */
+  --accent:        #4ade80;
+  --accent-dim:    rgba(74, 222, 128, 0.10);
+  --accent-border: rgba(74, 222, 128, 0.25);
+  --surface:       #2a2d32;
+  --surface-hover: #30353b;
+  --border:        rgba(255, 255, 255, 0.07);
 }
 
 * {
@@ -50,14 +62,37 @@ div.main-container {
 /* Fixed section (left side) */
 .fixed-container {
   width: 40%;
-  background-color: #222529;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  /*padding: 20px;*/
-  padding: 1%;
-  overflow: hidden;  /* No scrolling here */
+  overflow: hidden;
+
+  /* Radial glow + dot grid */
+  background:
+    radial-gradient(ellipse at 15% 12%, rgba(74, 222, 128, 0.08) 0%, transparent 55%),
+    radial-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px) 0 0 / 28px 28px,
+    #1e2124;
+
+  /* Gradient border on the right edge */
+  border-right: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Gradient border rendered via ::after */
+.fixed-container::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 25%,
+    rgba(255, 255, 255, 0.08) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 /* Scrollable section (right side) */
@@ -65,8 +100,45 @@ div.main-container {
   width: 60%;
   margin-left: 40%; /* Shift it to the right half */
   height: 100%;
-  overflow-y: auto;  /* Makes this section scrollable */
-  background-color: #222529;
-  /*padding: 20px;*/
+  overflow-y: auto;
+  scroll-behavior: smooth;
   padding: 1%;
+
+  /* Radial glow (top-right) + matching dot grid */
+  background:
+    radial-gradient(ellipse at 90% 5%, rgba(74, 222, 128, 0.05) 0%, transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.038) 1px, transparent 1px) 0 0 / 28px 28px,
+    #1e2124;
+}
+
+/* ── Responsive: stack layout on small screens ────────────── */
+@media screen and (max-width: 1080px) {
+  html, body {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  div.main-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .fixed-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+  }
+
+  .fixed-container::after {
+    display: none;
+  }
+
+  .scroll-container {
+    width: 100%;
+    margin-left: 0;
+    height: auto;
+    overflow-y: visible;
+    padding: 0;
+  }
 }

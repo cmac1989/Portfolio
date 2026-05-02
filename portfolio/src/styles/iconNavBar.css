@@ -1,21 +1,20 @@
-div.icon-nav-bar {
+.icon-nav-bar {
     display: flex;
-    margin-top: 45px;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
 }
 
-.fa-linkedin,
-.fa-facebook,
-.fa-instagram,
-.fa-twitter {
-    color: #3B5998;
-    font-size: 30px;
-    margin-right: 20px;
-    cursor: pointer;
-    transition: .2s;
+.icon-nav-bar a {
+    color: #9a9999;
+    font-size: 1.375rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
-.fa-linkedin:hover,
-.fa-facebook:hover,
-.fa-instagram:hover,
-.fa-twitter:hover {
-    color: #0d6efd;
+
+.icon-nav-bar a:hover {
+    color: #f3f3f3;
+    transform: translateY(-3px);
 }

@@ -1,7 +1,8 @@
 .contactForm {
-    background-color: #222529;
+    background-color: transparent;
     margin: 0 85px 70px 50px;
 }
+
 div.contactForm h1 {
     color: white;
     font-family: var(--font-display);
@@ -12,16 +13,99 @@ div.contactForm h1 {
     margin-bottom: 2rem;
 }
 
-div.mb-3 label {
-   color: white;
+/* Labels */
+div.mb-3 label,
+.contactForm .form-label {
+    color: #f3f3f3;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
 }
-span.error-text {
-    color: red;
-}
-.form-control {
-    margin-bottom: 10px;
+
+/* Inputs + textarea */
+.contactForm .form-control {
+    background-color: #2e3338;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #f3f3f3;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    padding: 0.625rem 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     width: 100%;
 }
+
+.contactForm .form-control::placeholder {
+    color: #9a9999;
+}
+
+.contactForm .form-control:focus {
+    background-color: #2e3338;
+    border-color: var(--accent-border);
+    color: #f3f3f3;
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.08);
+    outline: none;
+}
+
+.contactForm .form-control.is-invalid {
+    border-color: rgba(220, 80, 80, 0.6);
+}
+
+.contactForm .form-control.is-invalid:focus {
+    border-color: rgba(220, 80, 80, 0.8);
+    box-shadow: 0 0 0 3px rgba(220, 80, 80, 0.12);
+}
+
+/* Submit button */
 .custom-button {
-    margin-top: 20px;
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.75rem;
+    font-family: var(--font-display);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #1a1d20 !important;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.custom-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.custom-button:not(:disabled):hover {
+    background-color: #6ee7a0 !important;
+    border-color: #6ee7a0 !important;
+    /* transform: translateY(-1px); */
+    box-shadow: 0 4px 16px rgba(74, 222, 128, 0.25);
+}
+
+.error-text {
+    color: #e05555;
+    font-size: var(--fs-sm);
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.send-error {
+    margin-top: 0.75rem;
+}
+
+@media screen and (max-width: 1080px) {
+    .contactForm {
+        margin: 0 40px 40px 40px;
+    }
+}
+
+@media screen and (max-width: 592px) {
+    .contactForm {
+        margin: 20px;
+    }
 }

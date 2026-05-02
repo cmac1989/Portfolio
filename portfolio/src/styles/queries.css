@@ -13,15 +13,6 @@
         margin-left: 0;
         height: auto;
     }
-    div.hero p {
-        max-width: 325px;
-    }
-    div.hero {
-        margin: 40px;
-    }
-    .navbar-brand {
-        color: #f3f3f3;
-    }
     div.projects,
     div.skills {
         margin: 60px 40px 40px 40px;
@@ -100,9 +91,7 @@
     div.card-body-right {
         max-width: 100%;
     }
-    div.hero {
-        margin: 20px;
-    }
+
     div.projects,
     div.skills,
     footer.footer {
