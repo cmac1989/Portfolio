@@ -18,23 +18,23 @@ function Header() {
         if (!scrollEl) return;
 
         const updateActive = () => {
-            const { scrollTop, scrollHeight, clientHeight } = scrollEl;
-            const containerRect = scrollEl.getBoundingClientRect();
+            // On mobile the container doesn't scroll — the window does.
+            const containerScrolls = scrollEl.scrollHeight > scrollEl.clientHeight + 1;
 
-            // When the user has scrolled to the very bottom, the last
-            // section's top may never reach the trigger threshold, so
-            // force it active here.
+            const scrollTop    = containerScrolls ? scrollEl.scrollTop    : window.scrollY;
+            const clientHeight = containerScrolls ? scrollEl.clientHeight : window.innerHeight;
+            const scrollHeight = containerScrolls ? scrollEl.scrollHeight : document.documentElement.scrollHeight;
+            const originTop    = containerScrolls ? scrollEl.getBoundingClientRect().top : 0;
+
             if (scrollHeight - scrollTop - clientHeight < 10) {
                 setActiveSection('contact');
                 return;
             }
 
-            // Activate the last section whose top has entered the top
-            // third of the visible scroll container.
-            const sections = scrollEl.querySelectorAll('section[id]');
+            const sections = document.querySelectorAll('section[id]');
             let active = '';
             sections.forEach((section) => {
-                const sectionTop = section.getBoundingClientRect().top - containerRect.top;
+                const sectionTop = section.getBoundingClientRect().top - originTop;
                 if (sectionTop <= clientHeight / 3) {
                     active = section.id;
                 }
@@ -43,9 +43,13 @@ function Header() {
         };
 
         scrollEl.addEventListener('scroll', updateActive, { passive: true });
-        updateActive(); // set initial state on mount
+        window.addEventListener('scroll', updateActive, { passive: true });
+        updateActive();
 
-        return () => scrollEl.removeEventListener('scroll', updateActive);
+        return () => {
+            scrollEl.removeEventListener('scroll', updateActive);
+            window.removeEventListener('scroll', updateActive);
+        };
     }, []);
 
     return (

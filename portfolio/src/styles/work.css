@@ -1,55 +1,112 @@
 .work {
     background-color: #222529;
-    padding: 70px 85px 50px 20px;
+    margin: 70px 85px 50px 50px;
 }
+
 .work h2 {
-    color: white;
+    color: #f3f3f3;
     font-family: var(--font-display);
     font-size: var(--fs-h2);
     font-weight: 600;
     line-height: var(--lh-heading);
     letter-spacing: -0.01em;
-    padding-left: 30px;
+    margin: 0 0 2rem;
+    padding-bottom: 0.6rem;
+    position: relative;
 }
-div.work div.card {
-    border: 1px solid #222529;
+
+.work h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
 }
-div.work div.card-body {
-    background-color: #222529;
-    transition: .2s;
+
+div.work .card {
+    background-color: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-left: 2px solid var(--accent) !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+    margin-bottom: 1rem;
 }
-div.work div.card-body:hover {
-    background-color: rgb(34, 37, 41, .9);
+
+div.work .card:last-child {
+    margin-bottom: 0;
 }
-div.work div.card:hover {
-    border: 1px solid #222529;
+
+div.work .card:hover {
+    background-color: var(--surface-hover) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
-div.card-body-left,
-div.card-body-right {
-    display: inline-block;
-    vertical-align: top;
+
+div.work .card-body {
+    background-color: transparent !important;
+    padding: clamp(1.25rem, 3vw, 1.75rem) !important;
 }
-div.card-body-left {
-    vertical-align: text-top;
-    min-width: 9vw;
-}
+
 .card-body-container {
     display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
 }
+
+div.card-body-left {
+    flex-shrink: 0;
+    min-width: 6rem;
+}
+
+div.card-body-right {
+    flex: 1;
+    min-width: 0;
+}
+
 div p.date-text {
-    color: grey;
+    color: #9a9999;
+    font-family: var(--font-mono);
     font-size: var(--fs-sm);
     line-height: var(--lh-heading);
-    margin: 0;
+    margin: 0.1rem 0 0;
+    white-space: nowrap;
 }
-h3.body-text,
-p.body-text {
-    font-family: var(--font-sans);
-    color: #f3f3f3;
-    width: 100%;
-    line-height: var(--lh-body);
-}
+
 h3.body-text {
+    font-family: var(--font-display);
     font-size: var(--fs-h3);
     font-weight: 600;
+    color: #f3f3f3;
+    letter-spacing: -0.01em;
+    line-height: var(--lh-heading);
+    margin: 0 0 0.5rem;
+    width: 100%;
+}
+
+p.body-text {
+    font-family: var(--font-sans);
+    color: #c8cdd4;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    margin: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 1080px) {
+    .work {
+        margin: 60px 40px 40px 40px;
+    }
+}
+
+@media screen and (max-width: 592px) {
+    .work {
+        margin: 60px 20px 20px 20px;
+    }
+    .card-body-container {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
 }
